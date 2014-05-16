@@ -1,0 +1,40 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF8">
+<title>RIDERS</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="table-responsive">
+<table class="table">
+<tr>
+	<td>Имя</td>
+	<td>Дата рождения</td>
+	<td>Страна</td>
+	<td>Город</td>
+	<td>Категория</td>
+	<td>Номер телефона</td>
+</tr>
+{% for rider in riders %}
+<tr>
+	<td>{{ rider.name }}</td>
+	<td>{{ rider.byear }}</td>
+	<td>{{ rider.country }}</td>
+	<td>{{ rider.city }}</td>
+	<td>{{ rider.category }}</td>
+	<td>{{ rider.telnumber }}</td>
+</tr>
+
+	{% else %}
+    No users have been found.
+{% endfor %}
+</table>
+</div>
+
+
+</body>
+</html>
