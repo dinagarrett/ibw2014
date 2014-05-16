@@ -3,6 +3,7 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Silex\Provider\FormServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 
 
@@ -40,7 +41,7 @@ $app->get('/', function () use ($app){
 
 });
 
-$app->get('/registration', function () use ($app) {
+$app->match('/registration', function (Request $request) use ($app) {
 
 	$form = $app['form.factory']->createBuilder('form')
         ->add('name', null, array(
@@ -55,8 +56,20 @@ $app->get('/registration', function () use ($app) {
             ))
         ->getForm();
 
+	$form->handleRequest($request);
+
+    if ($form->isValid()) {
+        $data = $form->getData();
+
+
+        $app['db']->insert('riders', $data);
+    }
+
 
     return $app['twig']->render('hello.twig', array('form' => $form->createView()));
+
+
+
 });
 
 
@@ -68,3 +81,5 @@ $app->get('/admin', function () use ($app) {
 	));
 });
 $app->run();
+
+
